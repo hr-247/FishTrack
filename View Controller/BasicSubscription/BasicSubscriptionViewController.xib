@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BasicSubscriptionViewController" customModule="TrackApp" customModuleProvider="target">
+            <connections>
+                <outlet property="monthBtn" destination="5CL-kW-Mjb" id="P6h-go-vQO"/>
+                <outlet property="txtLbl" destination="iGk-pi-Ny4" id="i54-Db-9O9"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="yearBtn" destination="JoO-hp-YGW" id="b34-b4-LPs"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="760"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_inside" translatesAutoresizingMaskIntoConstraints="NO" id="MgU-PF-nE0">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="760"/>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9ci-5q-gaN">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="760"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGk-pi-Ny4">
+                    <rect key="frame" x="30" y="262" width="315" height="76.5"/>
+                    <string key="text">The use of this app is free during the first month. After 30 days, you pay only €1,99/month or €14,99/year for the Basic version.</string>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5CL-kW-Mjb">
+                    <rect key="frame" x="57.5" y="388.5" width="260" height="55"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="260" id="m4B-0l-esc"/>
+                        <constraint firstAttribute="height" constant="55" id="pCh-AL-WiL"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                    <state key="normal" title="Buy Monthly">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="roundCorner">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="monthlyBtnTapped:" destination="-1" eventType="touchUpInside" id="EsY-5y-wzv"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JoO-hp-YGW">
+                    <rect key="frame" x="57.5" y="476.5" width="260" height="55"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="260" id="1AA-7Z-HS6"/>
+                        <constraint firstAttribute="height" constant="55" id="AgU-vM-FQh"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                    <state key="normal" title="Buy Yearly">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="roundCorner">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="yearlyBtnTapped:" destination="-1" eventType="touchUpInside" id="agL-Jw-E2a"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="iGk-pi-Ny4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="3jm-BB-S19"/>
+                <constraint firstItem="JoO-hp-YGW" firstAttribute="top" secondItem="5CL-kW-Mjb" secondAttribute="bottom" constant="33" id="8QP-Yh-oKs"/>
+                <constraint firstItem="MgU-PF-nE0" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="96g-Xi-dtt"/>
+                <constraint firstItem="MgU-PF-nE0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="C6W-F1-9CL"/>
+                <constraint firstItem="5CL-kW-Mjb" firstAttribute="centerX" secondItem="iGk-pi-Ny4" secondAttribute="centerX" id="Cjd-mK-Stv"/>
+                <constraint firstItem="iGk-pi-Ny4" firstAttribute="centerY" secondItem="9ci-5q-gaN" secondAttribute="centerY" constant="-80" id="Cru-fg-E0A"/>
+                <constraint firstItem="9ci-5q-gaN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="GWS-w5-1ax"/>
+                <constraint firstItem="JoO-hp-YGW" firstAttribute="centerX" secondItem="5CL-kW-Mjb" secondAttribute="centerX" id="M2w-CM-MZn"/>
+                <constraint firstItem="MgU-PF-nE0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="P9B-9c-g2a"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iGk-pi-Ny4" secondAttribute="trailing" constant="30" id="VK5-cB-Inr"/>
+                <constraint firstItem="9ci-5q-gaN" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="c8m-6t-XAl"/>
+                <constraint firstItem="MgU-PF-nE0" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="hYL-KD-Zsx"/>
+                <constraint firstItem="5CL-kW-Mjb" firstAttribute="top" secondItem="iGk-pi-Ny4" secondAttribute="bottom" constant="50" id="iy0-WL-A9F"/>
+                <constraint firstItem="9ci-5q-gaN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="rJm-Q0-Qif"/>
+                <constraint firstItem="9ci-5q-gaN" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="tuT-i8-pwh"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="123.91304347826087" y="149.33035714285714"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bg_inside" width="750" height="1334"/>
+    </resources>
+</document>

@@ -1,0 +1,554 @@
+//
+//  AddYourPerformanceViewController.swift
+//  TrackApp
+//
+//  Created by sanganan on 11/6/19.
+//  Copyright © 2019 Sanganan. All rights reserved.
+//
+import UIKit
+
+@available(iOS 13.0, *)
+class AddYourPerformanceViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,AddYourPerformanceTableViewCellDelegate,WithViewControllerDelegate {
+    
+    //MARK:- SELECT PARTNER
+    func partnerName(name: [String]) {
+        self.newPartnerName = name
+        self.perfTableView.reloadData()
+    }
+    //MARK:- PREMIUM PAGE
+    func permiumBtnActn() {
+        let vc:PremiumViewController = PremiumViewController()
+        vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        self.navigationController?.present(vc, animated: true, completion: nil)
+    }
+    //MARK:- OUTLETS
+    @IBOutlet weak var doneActn: UIButton!
+    @IBOutlet weak var durDone: UIButton!
+    @IBOutlet weak var durationPicker: UIPickerView!
+    @IBOutlet weak var pickerBg: UIView!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var perfTableView: UITableView!
+    //MARK:- VARIABLE DECLARATION
+    var dateOI : String? = ""
+    var placesID : [String] = [String]()
+    var rateOI : String?=""
+    var asanaOI : String?=""
+    var extraOI : String?=""
+    var satisfyOI : String?=""
+    var newPlaceName : String = ""
+    var newDate = "Date & Time"
+    var duration : String? = "Duration"
+    var newPartnerName : [String] = [String]()
+    var userId : String?=""
+    var newRate : String? = "Rate"
+    var newExtra : String? = "Extras"
+    var newAasana : String? = "Asanas"
+    var newSatisfy : Int?
+    var satisfyRate : String?=""
+    var newExpRate : String?=""
+    var newShareFriends : Int? = 0
+    //MARK:- PICKER ENUM
+    enum whichPicker:String {
+       case RatePicker
+        case AsanaPicker
+        case ExtraPicker
+        case SatisfactionPicker
+        case DurPicker
+         }
+    var whichPickerTapped : whichPicker = whichPicker.AsanaPicker
+  
+    //MARK:- ARRAY DECLARATION
+    var perfarr = ["Date & Time","Duration","With?","Location","Positions","Rate","Asanas","Extras","Satisfaction"]
+    var ratingArr = ["Satisfaction Rating","Overall Experience Rating","Share this performance with Friends"]
+    var rateArr = [RateViewModal]()
+    var asanaArr = [AsanasViewModal]()
+    var extraArr = [ExtraViewModal]()
+    var satisfyArr  = [SatisfactionViewModal]()
+    
+    //MARK:- DATE PICKER DONE BUTTON
+    @IBAction func doneBtnActn(_ sender: UIButton) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.short
+        dateFormatter.timeStyle = DateFormatter.Style.short
+        //E, d MMM yyyy HH:mm:ss Z
+        dateFormatter.dateFormat = "d MMM,yy HH:mm a EEEE"
+        let strDate = dateFormatter.string(from: datePicker.date)
+        self.newDate = String(describing: strDate)
+        self.dateOI = AppUtils.dateToTimestamp(date: datePicker!.date as NSDate)
+        print(self.newDate)
+        self.perfTableView.reloadData()
+        self.datePicker.isHidden = true
+        self.pickerBg.isHidden = true
+        self.doneActn.isHidden = true
+    }
+    @objc func dataChanged()
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.short
+        dateFormatter.timeStyle = DateFormatter.Style.short
+        let strDate = dateFormatter.string(from: datePicker.date)
+        AddYourPerformanceTableViewCell().performanceLabel.text = strDate
+    }
+    //MARK:- viewDidLoad
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.nav()
+        NotificationCenter.default.addObserver(self, selector: #selector(placeChanged(_:)), name: NSNotification.Name(rawValue:"PlaceName"), object: nil)
+        self.doneActn.layer.cornerRadius = 5;
+        self.durDone.layer.cornerRadius = 5;
+        perfTableView.register(UINib(nibName: "AddYourPerformanceTableViewCell", bundle: nil), forCellReuseIdentifier: "AddYourPerformanceTableViewCell")
+        perfTableView.register(UINib(nibName: "AddYourPerformanceTableViewCell2", bundle: nil), forCellReuseIdentifier: "AddYourPerformanceTableViewCell2")
+        perfTableView.backgroundColor = .black
+        pickerBg.isHidden =  true
+        datePicker.isHidden = true
+<<<<<<< HEAD
+        
+=======
+//        perfTableView.dataSource = self
+//        perfTableView.delegate = self
+>>>>>>> 2f74bb4d0edef7a4a0609d60a1e9fa22f0818d22
+       durationPicker.dataSource = self
+        durationPicker.delegate = self
+        self.getRateApi()
+    }
+  
+    //MARK:- NavigationController function
+    func nav()
+    {
+        self.title = "Add Your Performance"
+        navigationController?.navigationBar.barTintColor = UIColor.black
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 25)!]
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        let button1 = UIBarButtonItem(image: UIImage(named: "back.png"), style: .plain, target: self, action: #selector(backButton))
+        
+        self.navigationItem.leftBarButtonItem  = button1
+        navigationItem.leftBarButtonItem?.tintColor = .white
+        
+        self.navigationItem.rightBarButtonItem  = UIBarButtonItem(title: "OK", style: .plain, target: self, action: #selector(addTapped))
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+    }
+    //MARK:- PLACE CHANGED FUNCTION
+    @objc func placeChanged(_ sender: NSNotification) {
+        
+        //     print(((sender.object) as! NSDictionary).value(forKey:"i!d"),((sender.object) as! NSDictionary).value(forKey:"place!s"),"notiData")
+        self.newPlaceName =  ((((sender.object) as! NSDictionary).value(forKey:"places")) as! [String]).joined(separator: ",")
+        self.placesID = ((sender.object) as! NSDictionary).value(forKey:"id") as! [String]
+        self.perfTableView.reloadData()
+        // print(str)
+    }
+    //MARK:- PICKER VIEW
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch self.whichPickerTapped {
+        case .RatePicker:
+            return rateArr.count
+        case .AsanaPicker:
+           return asanaArr.count
+        case .ExtraPicker:
+               return extraArr.count
+        case .SatisfactionPicker:
+            return satisfyArr.count
+        case .DurPicker:
+            return ClassConstant.picker.count
+         }
+}
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        print( rateArr.count)
+                switch self.whichPickerTapped {
+                case .RatePicker:
+                    return String(describing:rateArr[row].rate!)
+                case .AsanaPicker:
+//                    print("asana row T",asanaArr.count)
+                    return String(describing:asanaArr[row].asanaName!)
+                case .ExtraPicker:
+//                  print("extra row T",extraArr.count)
+                    return extraArr[row].extraName!
+                case .SatisfactionPicker:
+                    return String(describing: satisfyArr[row].satisfactionName)
+            case .DurPicker:
+                return (ClassConstant.picker[row]+" Mins")
+             }
+    }
+func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    print(row)
+          self.perfTableView.reloadData()
+        switch self.whichPickerTapped {
+        case .RatePicker:
+           rateOI = self.rateArr[row].rate_id!
+           //print(rateOI,"rate1542")
+            return  self.newRate = self.rateArr[row].rate!
+        
+            case .AsanaPicker:
+            asanaOI = self.asanaArr[row].asana_id
+            return  self.newAasana = self.asanaArr[row].asanaName!
+        case .ExtraPicker:
+            extraOI = self.extraArr[row].extra_id
+            return self.newExtra = self.extraArr[row].extraName!
+        case .SatisfactionPicker:
+            satisfyOI = self.satisfyArr[row].satisfy_id
+            return  self.newSatisfy = self.satisfyArr[row].satisfactionName
+        case .DurPicker:
+            return  self.duration = ClassConstant.picker[row]
+    }
+  
+    }
+    //MARK:- PICKER DONE BUTTON
+    @IBAction func durationDone(_ sender: Any) {
+        //print(self.picker[row])
+        // self.perfTableView.reloadData()
+        if self.duration == "More"
+        {
+            let alertController = UIAlertController(title: "Add Mins", message: "", preferredStyle: .alert)
+                   
+                   // Create the actions
+                   let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+                       UIAlertAction in
+                    //   NSLog("Added")
+                       let whiteSpace = ((alertController.textFields![0].text!) ).trimmingCharacters(in: .whitespaces)
+                       if whiteSpace.count != 0 {
+                           self.duration = whiteSpace
+                           self.perfTableView.reloadData()
+                       }
+                       
+                   }
+                   let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel) {
+                       UIAlertAction in
+                       NSLog("Cancelled")
+                       }
+                   
+                alertController.addTextField { (textField:UITextField) -> Void in
+                       textField.keyboardType = .numbersAndPunctuation
+                   }
+                   alertController.addAction(okAction)
+                   alertController.addAction(cancelAction)
+                   
+                   self.present(alertController, animated: true, completion: nil)
+               }
+        self.durationPicker.isHidden = true
+        self.durDone.isHidden = true
+    }
+    //MARK:- BACK BUTTON
+    @objc func backButton()
+    {
+        self.navigationController?.popViewController(animated: true)
+    }
+    //MARK:- ALL DATA SAVE BUTTON
+    @objc func addTapped()
+    {
+//      let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+//
+//        alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { action in
+            self.performanceApi()
+            
+        //}))
+//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//        alert.view.tintColor = .black
+//        self.present(alert, animated: true)
+    }
+    
+    //MARK:- TABLE VIEW
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+        }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0
+        {
+            return perfarr.count
+        }else
+        {
+            return ratingArr.count
+        }
+    }
+    //MARK:- CELL FOR ROWAT
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+                                // SECTION 0
+        if indexPath.section == 0
+        {
+            let cell : AddYourPerformanceTableViewCell = perfTableView.dequeueReusableCell(withIdentifier: "AddYourPerformanceTableViewCell", for: indexPath) as! AddYourPerformanceTableViewCell
+            
+            cell.selectionStyle = .none
+            cell.delegate = self
+            cell.performanceLabel.text = perfarr[indexPath.row]
+            if indexPath.row == 0
+            {
+                cell.performanceLabel.text = self.newDate
+            }
+            if indexPath.row < 5
+            {
+                cell.apImage.image = UIImage(named: "next (1).png")
+                
+                if indexPath.row == 2
+                {
+                    cell.apImage.image = UIImage(named: "paid_feature.png")
+                }
+            }
+         if self.duration != "Duration" && indexPath.row == 1
+                {
+                    cell.performanceLabel.text = self.duration!
+                }
+            if self.newPartnerName.count != 0 && indexPath.row == 2
+            {
+              cell.performanceLabel.text = self.newPartnerName.joined(separator:",")
+                
+            }
+            if self.newPlaceName != "" && indexPath.row == 3
+            {
+                cell.performanceLabel.text = "sanganan it solution noida" + "\n" + self.newPlaceName
+                //   cell.performanceLabel.font = UIFont(name: "Calibri", size: 6)
+            }
+             if self.newRate != "" && indexPath.row == 5
+            {
+                cell.performanceLabel.text = self.newRate
+            }
+             if self.newAasana != "" && indexPath.row == 6
+            {
+                cell.performanceLabel.text = self.newAasana
+            }
+             if self.newExtra != "" && indexPath.row == 7
+            {
+              cell.performanceLabel.text = self.newExtra
+            }
+             if self.newSatisfy != nil && indexPath.row == 8
+            {
+                cell.performanceLabel.text = String(describing: self.newSatisfy)
+            }
+           return cell
+        }
+        else         //SECTION 1
+        {
+            let cell : AddYourPerformanceTableViewCell2 = perfTableView.dequeueReusableCell(withIdentifier: "AddYourPerformanceTableViewCell2", for: indexPath) as! AddYourPerformanceTableViewCell2
+            cell.selectionStyle = .none
+            cell.delegate = self
+            cell.label.text = ratingArr[indexPath.row]
+            cell.selectionStyle = .none
+            cell.label.numberOfLines = 2
+            if indexPath.row == 0
+            {
+                cell.switch.isHidden = true
+                cell.cosmosView.isHidden = false
+            }
+            else if indexPath.row == 1
+            {
+                cell.switch.isHidden = true
+                cell.cosmosView.isHidden = false
+            }
+            else
+            {
+                cell.cosmosView.isHidden = true
+                cell.switch.isHidden = false
+            }
+            return cell
+        }
+    }
+    //MARK:- TABLEVIEW DIDSELECT ROWAT
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      
+        if indexPath.section == 0
+        {
+            if indexPath.row == 0
+            {
+                datePicker.isHidden = false
+                pickerBg.isHidden = false
+                doneActn.isHidden = false
+                self.datePicker.datePickerMode = .dateAndTime
+            }
+         else   if indexPath.row == 1
+            {
+                durationPicker.isHidden = false
+                durDone.isHidden = false
+               self.whichPickerTapped = whichPicker.DurPicker
+                self.durationPicker.reloadAllComponents()
+            }
+        else    if indexPath.row == 2
+            {
+                let vc = WithViewController()
+                vc.delegate = self
+                self.navigationController?.pushViewController(vc, animated: true)
+                return
+            }
+           else if indexPath.row == 3
+            {
+                let vc = LocationViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+                return
+            }
+         else   if indexPath.row == 4
+            {
+                let vc = PositionsViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+                return
+            }
+          else  if indexPath.row == 5
+            {
+                durationPicker.isHidden = false
+                durDone.isHidden = false
+               self.whichPickerTapped = whichPicker.RatePicker
+                self.durationPicker.reloadAllComponents()
+              }
+         else   if indexPath.row == 6
+            {
+                durationPicker.isHidden = false
+                durDone.isHidden = false
+                 self.whichPickerTapped = whichPicker.AsanaPicker
+                  self.durationPicker.reloadAllComponents()
+            }
+         else   if indexPath.row == 7
+            {
+                durationPicker.isHidden = false
+                durDone.isHidden = false
+                  self.whichPickerTapped = whichPicker.ExtraPicker
+                  self.durationPicker.reloadAllComponents()
+            }
+         else   if indexPath.row == 8
+            {
+                durationPicker.isHidden = false
+                durDone.isHidden = false
+                self.whichPickerTapped = whichPicker.SatisfactionPicker
+                self.durationPicker.reloadAllComponents()
+            }
+        }
+    }
+    //MARK:- PERFORMANCE POST API
+    func performanceApi()
+    {
+//        "userId":"5dca97cf37a2c90de8c1b768",
+//        "dateTime":"1571185430",
+//        "duration":"105",
+//        "addPartner":["5ddcb292ebda450017e17d54", "5ddcb507ebda450017e17d55"],
+//        "location":"5dcd057df4d47044f8a8d1ee",
+//        "positions":["5de4ea4c029bd800176097a3", "5dcd082cdf9eb334d4384d06", "5dcd0858df9eb334d4384d08"],
+//        "rate":"5dcbebcf84756f0fd87dc377",
+//        "asanaName":"5dcbec9c034d6019fcd4fe7c",
+//        "extra":"5dcbed581e37e34024093ce2",
+//        "satisfaction":"5dcbee29627adb1334c1895b",
+//        "satisfactionRating":"1",
+//        "experienceRating":"2",
+//        "shareWithFriends":"0"
+
+//        [ "userId": "5df0c74f63a2780017a5bd97", "extra": "", "duration": "0", "asanaName": "", "rate": "", "location": ""]
+        if self.newPartnerName.count == 0{
+            AppUtils.showToast(message: "Please add partner first")
+            return
+        }
+        self.newDate = (self.newDate ==  "Date & Time" ? "1571185430" : self.newDate);
+        self.satisfyOI = (self.satisfyOI == "" ? "5dcbee29627adb1334c1895b" : self.newDate);
+        self.newExpRate = (self.newExpRate == "" ? "2" : self.newExpRate);
+        self.satisfyRate = (self.satisfyRate == "" ? "0" : self.satisfyRate)
+        self.rateOI = (self.rateOI == "" ? "5dcbebcf84756f0fd87dc377" : self.rateOI)
+        self.asanaOI = (self.asanaOI == "" ? "5dcbec9c034d6019fcd4fe7c" : self.asanaOI)
+        self.extraOI = (self.extraOI == "" ? "5dcbed581e37e34024093ce2" : self.extraOI)
+        
+        Utils.startLoading(self.view)
+        let url : String = "\(Constant.basicApi)/createPerformance"
+        let dict:[String:Any] = ["userId": AppUtils.AppDelegate().userId,
+                                 "duration":self.duration!,
+                                 "dateTime":self.dateOI!,
+                                 "addPartner":self.newPartnerName,
+<<<<<<< HEAD
+                                 "location":"5dcd057df4d47044f8a8d1ee",
+=======
+                                 "location":self.placesID,
+>>>>>>> 2f74bb4d0edef7a4a0609d60a1e9fa22f0818d22
+                                 "positions":[],
+                                 "rate": self.rateOI!,
+                                 "asanaName": self.asanaOI!,
+                                 "extra": self.extraOI!,
+                                 "satisfaction": self.satisfyOI!,
+                                 "satisfactionRating":self.satisfyRate!,
+                                 "experienceRating":self.newExpRate!,
+                                 "shareWithFriends": self.newShareFriends!]
+    //  print(dict,"user123")
+Service.sharedInstance.postRequest(Url:url,modalName: PerformanceModal.self , parameter: dict as [String:Any]) { (response, error) in
+    print("response", response as Any)
+            DispatchQueue.main.async {
+                Utils.stopLoading()
+                if let res = response?.Success
+                {
+                    if res == 1{
+                    }else{
+                        AppUtils.showToast(message: "Please enter all data first")
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    //MARK:- PERFORMANCE GET API
+    func getRateApi()
+    {
+        Utils.startLoading(self.view)
+        let url : String = "\(Constant.basicApi)/getPerformanceData"
+        Service.sharedInstance.getRequest(Url:url,modalName:getPerformanceModal.self,completion: { (response, error) in
+            // print(response)
+            DispatchQueue.main.async {
+                Utils.stopLoading()
+                if response?.Success == 1
+                {
+                    for item in response!.Rates
+                    {
+                        let modal = RateViewModal(rateModal:item)
+                        self.rateArr.append(modal)
+//                        if self.rateArr.count > 0{
+//                            self.newRate = self.rateArr[0].rate
+//                            self.rateOI = self.rateArr[0].rate_id
+//                        }
+                       }
+                    for item in response!.Asanas
+                    {
+                        let modal = AsanasViewModal(asanaModal: item)
+                        self.asanaArr.append(modal)
+//                        if self.asanaArr.count > 0{
+//                            self.newAasana = self.asanaArr[0].asanaName
+//                            self.asanaOI = self.asanaArr[0].asana_id
+//                        }
+                 }
+                    for item in response!.Extras
+                    {
+                        let modal = ExtraViewModal(extraModal: item)
+                        self.extraArr.append(modal)
+//                        if self.extraArr.count > 0{
+//                            self.newExtra = self.extraArr[0].extraName
+//                            self.extraOI = self.extraArr[0].extra_id
+//                        }
+                    }
+                  for item in response!.Satisfaction
+                    {
+                        let modal = SatisfactionViewModal(satisfactionModal: item)
+                        self.satisfyArr.append(modal)
+//                        if self.satisfyArr.count > 0{
+//                            self.newSatisfy = self.satisfyArr[0].satisfactionName
+//                            self.satisfyOI = self.satisfyArr[0].satisfy_id
+//                        }
+                      }
+                    self.perfTableView.dataSource = self
+                    self.perfTableView.delegate = self
+                    self.perfTableView.reloadData()
+                }
+                
+                self.perfTableView.delegate = self
+                self.perfTableView.dataSource = self
+                self.perfTableView.reloadData()
+            }
+        })
+    }
+}
+@available(iOS 13.0, *)
+extension AddYourPerformanceViewController : AddYourPerformanceTableViewCell2Delegate {
+    func starRating(cell: Int, rating: Double) {
+        self.satisfyRate =  String(describing: rating)
+        self.newExpRate = String(describing: rating)
+        print(cell,rating,"rating")
+    }
+    func switchRating(switchRate: Int) {
+        self.newShareFriends = switchRate
+    //    print(newShareFriends!,"rate")
+    }
+}

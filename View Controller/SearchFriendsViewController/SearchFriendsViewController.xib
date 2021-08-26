@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchFriendsViewController" customModule="TrackApp" customModuleProvider="target">
+            <connections>
+                <outlet property="SearchTextField" destination="YRT-zM-jRO" id="WqD-HF-gkz"/>
+                <outlet property="searchFriendsTableView" destination="qFM-bW-yf3" id="ihp-NM-8NT"/>
+                <outlet property="searchView" destination="HTi-9G-Zif" id="EfT-PW-5Ne"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_inside" translatesAutoresizingMaskIntoConstraints="NO" id="gvX-R3-ZRo">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HTi-9G-Zif">
+                    <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YRT-zM-jRO">
+                            <rect key="frame" x="20" y="5" width="374" height="35"/>
+                            <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1.2"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="roundCorner">
+                                    <real key="value" value="17.5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </textField>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="6c3-nF-vBU">
+                            <rect key="frame" x="30" y="12.5" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="KMD-Mw-9mK"/>
+                                <constraint firstAttribute="width" constant="20" id="q2O-cs-h6a"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="YRT-zM-jRO" firstAttribute="leading" secondItem="HTi-9G-Zif" secondAttribute="leading" constant="20" id="8Jf-BG-Fde"/>
+                        <constraint firstAttribute="bottom" secondItem="YRT-zM-jRO" secondAttribute="bottom" constant="10" id="Ef4-iW-wsL"/>
+                        <constraint firstAttribute="height" constant="50" id="MZl-yb-lym"/>
+                        <constraint firstItem="6c3-nF-vBU" firstAttribute="centerY" secondItem="YRT-zM-jRO" secondAttribute="centerY" id="WVk-dy-iNL"/>
+                        <constraint firstItem="6c3-nF-vBU" firstAttribute="leading" secondItem="HTi-9G-Zif" secondAttribute="leading" constant="30" id="aO3-So-GKU"/>
+                        <constraint firstItem="YRT-zM-jRO" firstAttribute="top" secondItem="HTi-9G-Zif" secondAttribute="top" constant="5" id="gsZ-WJ-VpU"/>
+                        <constraint firstAttribute="trailing" secondItem="YRT-zM-jRO" secondAttribute="trailing" constant="20" id="ufn-rE-cs5"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qFM-bW-yf3">
+                    <rect key="frame" x="0.0" y="94" width="414" height="802"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="gvX-R3-ZRo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="6gU-AI-nZ7"/>
+                <constraint firstItem="qFM-bW-yf3" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="EaP-xj-bp9"/>
+                <constraint firstItem="gvX-R3-ZRo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="FJv-iK-vMI"/>
+                <constraint firstItem="gvX-R3-ZRo" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="KIc-O1-sFe"/>
+                <constraint firstItem="HTi-9G-Zif" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="OLi-zu-oMG"/>
+                <constraint firstItem="HTi-9G-Zif" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Ow5-KN-oJD"/>
+                <constraint firstAttribute="bottom" secondItem="gvX-R3-ZRo" secondAttribute="bottom" id="QQe-d5-mR9"/>
+                <constraint firstItem="HTi-9G-Zif" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Urz-GW-40H"/>
+                <constraint firstItem="qFM-bW-yf3" firstAttribute="top" secondItem="HTi-9G-Zif" secondAttribute="bottom" id="XsK-dt-iBy"/>
+                <constraint firstItem="qFM-bW-yf3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="dfS-X4-7PK"/>
+                <constraint firstItem="qFM-bW-yf3" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="fb1-xq-Z5e"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="86.956521739130437" y="-82.366071428571431"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bg_inside" width="750" height="1334"/>
+        <image name="search" width="36" height="36"/>
+    </resources>
+</document>

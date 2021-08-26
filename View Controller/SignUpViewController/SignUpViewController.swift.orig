@@ -1,0 +1,159 @@
+//
+//  SignUpViewController.swift
+//  TrackApp
+//
+//  Created by sanganan on 11/4/19.
+//  Copyright © 2019 Sanganan. All rights reserved.
+//
+
+import UIKit
+@available(iOS 13.0, *)
+class SignUpViewController: UIViewController {
+    
+    @IBOutlet var tickButton: UIButton!
+    var checkValue : Bool = false
+    @IBOutlet var boxStatementLabel: UILabel!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var doneButton: UIButton!
+    
+    @IBOutlet weak var emailField: UITextField!
+    
+    @IBOutlet weak var userNameField: UITextField!
+    
+    @IBOutlet weak var passwordField: UITextField!
+    
+    @IBOutlet weak var rePassField: UITextField!
+    
+    @IBOutlet weak var locationImage: UIImageView!
+    
+    @IBOutlet weak var locationLabel: UILabel!
+    
+    @IBOutlet var tcLabel: UIView!
+   //MARK:- VIEW DID LOAD
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.nav()
+        self.passwordField.isSecureTextEntry = true
+        self.rePassField.isSecureTextEntry = true
+        tickButton.setImage(UIImage(named: "checkBox"), for: .selected)
+        tickButton.setImage(UIImage(named: "uncheckBox"), for: .normal)
+        
+        self.locationImage.image = UIImage(named: "compass (1).png")
+        
+        doneButton.layer.cornerRadius = 20
+        
+        self.topConstraint.constant = (UIScreen.main.bounds.height - (0.88*UIScreen.main.bounds.height))
+    }
+    //MARK:- NAVIGATION FUNC
+   func nav()
+    {
+        self.title = "Sign Up"
+               navigationController?.navigationBar.barTintColor = UIColor.black
+               navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 25)!]
+               
+               navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+               let button1 = UIBarButtonItem(image: UIImage(named: "back.png"), style: .plain, target: self, action: #selector(backButton))
+               self.navigationItem.leftBarButtonItem  = button1
+               navigationItem.leftBarButtonItem?.tintColor = .white
+    }
+    //MARK:- CHECK BOX
+    @IBAction func tickBtnActn(_ sender: UIButton) {
+//        self.checkValue = true
+//        print(self.checkValue,"tick")
+sender.transform = CGAffineTransform(scaleX: 0, y: 0)
+         sender.isSelected = !sender.isSelected
+        sender.transform = .identity
+          }
+    
+       //MARK:- SIGNUP API CALL
+    func signUPApiCall(){
+        Utils.startLoading(self.view)
+        let url:String = "\(Constant.basicApi)/signup"
+        let userData = UserDefaults.standard
+        let lat = Double(userData.string(forKey: Constant.latitude) ?? "0.0")
+        let long = Double(userData.string(forKey: Constant.longitude) ?? "0.0")
+        let dict:[String:Any] = ["email":emailField.text!,"username":userNameField.text!,"password":passwordField.text!,"loc":["Point":"Point","coordinates":[lat,long]]]
+        
+        Service.sharedInstance.postRequest(Url:url,modalName: resultModal.self , parameter: dict as [String:Any]) { (response, error) in
+            print("response",response as Any)
+            DispatchQueue.main.async {
+                Utils.stopLoading()
+            if let res = response?.Success
+            {
+                if res == 1{
+                    let vc:HomeViewController = HomeViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    let userData = UserDefaults.standard
+                    userData.set(response?.User?.email, forKey: Constant.email)
+                    userData.set(response?.User?._id, forKey: Constant.id)
+                    userData.set(response?.User?.username, forKey: Constant.username)
+                    userData.synchronize()
+<<<<<<< HEAD
+            
+           // self.navigationController?.popViewController(animated: true)
+=======
+// self.navigationController?.popViewController(animated: true)
+>>>>>>> 2f74bb4d0edef7a4a0609d60a1e9fa22f0818d22
+            }else{
+AppUtils.showToast(message: (response?.Message!)!)
+            }
+            }else{
+                // do in case of error
+                }
+            }
+        }
+    }
+    //MARK:- ACTION BUTTON
+    @objc func backButton()
+    {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func tcButton(_ sender: Any) {
+        
+        let vc = TermsViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+        return
+        }
+    //MARK:- DONE BUTTON & VALIDATION
+    @IBAction func doneButton(_ sender: Any) {
+        
+        let email = AppUtils.isValidEmail(testStr: emailField.text!)
+        
+        
+     //   let pwd = AppUtils.isValidPwd(testStr: passwordField.text!)
+        
+        
+        //        let userName = AppUtils.isValidUsername(testStr: userNameField.text!)
+        //        AppUtils.showToast(message: "Please fill all details")
+        
+        if email == true && passwordField.text == rePassField.text && userNameField.text != "" && passwordField.text != ""{
+            
+            self.signUPApiCall()
+            // AppUtils.showToast(message: "Signup successfully", view: self.view)
+            }
+        else if (emailField.text == "" || userNameField.text == "" || passwordField.text == "" || rePassField.text == "" ) {
+            
+            AppUtils.showToast(message: "Please fill all details")
+        }
+        else if email == false{
+            
+            AppUtils.showToast(message: "invalid email")
+        }
+//        else if pwd == false {
+//
+//            AppUtils.showToast(message: "inavlid paasword")
+//
+//        }
+        else if (passwordField.text != rePassField.text)
+        {
+            
+            AppUtils.showToast(message: "Passwords are not matching")
+        }
+        
+    }
+}
+
+
+

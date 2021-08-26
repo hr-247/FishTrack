@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutViewController" customModule="TrackApp" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="webView" destination="MqK-0w-lfM" id="nyF-dB-Gok"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_inside" translatesAutoresizingMaskIntoConstraints="NO" id="MCY-3s-1bG">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                </imageView>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MqK-0w-lfM">
+                    <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </webView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="MqK-0w-lfM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="0M4-T1-WZJ"/>
+                <constraint firstItem="MqK-0w-lfM" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Etw-Ai-eSc"/>
+                <constraint firstAttribute="bottom" secondItem="MCY-3s-1bG" secondAttribute="bottom" id="Lx7-Nu-23H"/>
+                <constraint firstItem="MqK-0w-lfM" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Px9-BK-sjC"/>
+                <constraint firstItem="MCY-3s-1bG" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="cmD-ko-VqH"/>
+                <constraint firstItem="MCY-3s-1bG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="eNm-70-GJu"/>
+                <constraint firstAttribute="bottom" secondItem="MqK-0w-lfM" secondAttribute="bottom" id="oah-sm-VJz"/>
+                <constraint firstItem="MCY-3s-1bG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="vDI-R5-GcW"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="131.8840579710145" y="104.46428571428571"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bg_inside" width="750" height="1334"/>
+    </resources>
+</document>
