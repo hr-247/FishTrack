@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="116" id="KGk-i7-Jjw" customClass="TableViewCell" customModule="TrackApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="116"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="116"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Brm-z2-Hiq">
+                        <rect key="frame" x="14" y="10" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="pDT-aU-uLw"/>
+                            <constraint firstAttribute="width" constant="60" id="vam-bs-k0t"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="roundCorner">
+                                <real key="value" value="30"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V1g-xh-0S0">
+                        <rect key="frame" x="0.0" y="105" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.65098039220000004" green="0.94901960780000005" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="gvM-LZ-TBH"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZK-me-gdG">
+                        <rect key="frame" x="84" y="10" width="222" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="eRi-VJ-KNl"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZy-Pe-iuR">
+                        <rect key="frame" x="84" y="50" width="222" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="yWx-3C-N89"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnN-Tz-e7F">
+                        <rect key="frame" x="241" y="75" width="25" height="25"/>
+                        <state key="normal" image="check-mark (1)"/>
+                        <connections>
+                            <action selector="acceptBtnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="NHk-UQ-ZEz"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J25-bM-tnz">
+                        <rect key="frame" x="281" y="75" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="6bu-6N-avc"/>
+                            <constraint firstAttribute="height" constant="25" id="JMa-sb-9hD"/>
+                        </constraints>
+                        <state key="normal" image="error (1)"/>
+                        <connections>
+                            <action selector="rejectBtnTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YPR-6m-iim"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="YZy-Pe-iuR" firstAttribute="leading" secondItem="PZK-me-gdG" secondAttribute="leading" id="301-4l-18V"/>
+                    <constraint firstItem="J25-bM-tnz" firstAttribute="trailing" secondItem="PZK-me-gdG" secondAttribute="trailing" id="4Ey-xW-Xzn"/>
+                    <constraint firstItem="J25-bM-tnz" firstAttribute="top" secondItem="PZK-me-gdG" secondAttribute="bottom" constant="25" id="5K8-Oy-fiX"/>
+                    <constraint firstItem="YZy-Pe-iuR" firstAttribute="trailing" secondItem="PZK-me-gdG" secondAttribute="trailing" id="8oY-oQ-7MU"/>
+                    <constraint firstItem="V1g-xh-0S0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Byf-Yk-u1v"/>
+                    <constraint firstAttribute="trailing" secondItem="V1g-xh-0S0" secondAttribute="trailing" id="MRn-ki-Qbk"/>
+                    <constraint firstItem="tnN-Tz-e7F" firstAttribute="height" secondItem="J25-bM-tnz" secondAttribute="height" id="Ouy-yc-6OD"/>
+                    <constraint firstItem="J25-bM-tnz" firstAttribute="leading" secondItem="tnN-Tz-e7F" secondAttribute="trailing" constant="15" id="R30-hu-ZB5"/>
+                    <constraint firstItem="Brm-z2-Hiq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Taj-Ih-pMU"/>
+                    <constraint firstItem="Brm-z2-Hiq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="TlK-aG-moR"/>
+                    <constraint firstItem="YZy-Pe-iuR" firstAttribute="top" secondItem="PZK-me-gdG" secondAttribute="bottom" id="UPD-iK-irY"/>
+                    <constraint firstItem="PZK-me-gdG" firstAttribute="top" secondItem="Brm-z2-Hiq" secondAttribute="top" id="X0K-t0-dP8"/>
+                    <constraint firstItem="V1g-xh-0S0" firstAttribute="top" secondItem="J25-bM-tnz" secondAttribute="bottom" constant="5" id="XC6-E4-Rwp"/>
+                    <constraint firstItem="tnN-Tz-e7F" firstAttribute="width" secondItem="J25-bM-tnz" secondAttribute="width" id="YHf-vN-hKw"/>
+                    <constraint firstAttribute="trailing" secondItem="PZK-me-gdG" secondAttribute="trailing" constant="14" id="evE-7Z-odT"/>
+                    <constraint firstItem="PZK-me-gdG" firstAttribute="leading" secondItem="Brm-z2-Hiq" secondAttribute="trailing" constant="10" id="mMY-g6-5e0"/>
+                    <constraint firstItem="tnN-Tz-e7F" firstAttribute="bottom" secondItem="J25-bM-tnz" secondAttribute="bottom" id="sxM-RH-BG3"/>
+                    <constraint firstAttribute="bottom" secondItem="V1g-xh-0S0" secondAttribute="bottom" constant="8" id="xse-3z-kjJ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="acceptBtn" destination="tnN-Tz-e7F" id="3ht-kY-02v"/>
+                <outlet property="descLbl" destination="PZK-me-gdG" id="ntj-CA-Mvy"/>
+                <outlet property="profileImg" destination="Brm-z2-Hiq" id="7XC-SD-tXr"/>
+                <outlet property="rejectBtn" destination="J25-bM-tnz" id="T2W-C6-BEw"/>
+                <outlet property="timeLbl" destination="YZy-Pe-iuR" id="bx5-zX-Ht9"/>
+            </connections>
+            <point key="canvasLocation" x="24.637681159420293" y="93.75"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="check-mark (1)" width="25" height="25"/>
+        <image name="error (1)" width="25" height="25"/>
+    </resources>
+</document>
